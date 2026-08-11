@@ -17,24 +17,6 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./pages/pages.routes').then((m) => m.PagesRoutes),
       },
-      {
-        path: 'sample-page',
-        loadChildren: () =>
-          import('./pages/pages.routes').then((m) => m.PagesRoutes),
-      },
-    ],
-  },
-  {
-    path: '',
-    component: BlankComponent,
-    children: [
-      {
-        path: 'authentication',
-        loadChildren: () =>
-          import('./pages/authentication/authentication.routes').then(
-            (m) => m.AuthenticationRoutes
-          ),
-      },
     ],
   },
   {
