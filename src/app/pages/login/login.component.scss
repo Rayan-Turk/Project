@@ -1,0 +1,153 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f6f9fc;
+  padding: 24px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  &__logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #5d87ff, #49beff);
+  }
+
+  &__brand-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2a3547;
+  }
+
+  h1 {
+    margin: 0 0 6px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #2a3547;
+  }
+
+  .subtitle {
+    margin: 0 0 28px;
+    font-size: 14px;
+    color: #7c8fac;
+  }
+}
+
+.form-group {
+  margin-bottom: 18px;
+
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2a3547;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e5eaef;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: #5d87ff;
+    }
+  }
+}
+
+.error {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #fa896b;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  font-size: 13px;
+
+  .remember {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #2a3547;
+    cursor: pointer;
+
+    input {
+      width: auto;
+      cursor: pointer;
+    }
+  }
+
+  .forgot-link {
+    color: #5d87ff;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 11px;
+  background-color: #5d87ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #4570ea;
+  }
+}
+
+.signup-prompt {
+  margin: 24px 0 0;
+  text-align: center;
+  font-size: 13px;
+  color: #7c8fac;
+
+  a {
+    color: #5d87ff;
+    text-decoration: none;
+    font-weight: 600;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.login-error {
+  text-align: center;
+  margin-bottom: 16px;
+}

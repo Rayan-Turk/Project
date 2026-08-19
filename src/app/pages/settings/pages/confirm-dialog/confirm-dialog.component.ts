@@ -1,0 +1,23 @@
+import { Component, input, output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-confirm-dialog',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './confirm-dialog.component.html',
+  styleUrl: './confirm-dialog.component.scss',
+})
+export class ConfirmDialogComponent {
+  message = input.required<string>();
+  confirmed = output<void>();
+  cancelled = output<void>();
+
+  onConfirm(): void {
+    this.confirmed.emit();
+  }
+
+  onCancel(): void {
+    this.cancelled.emit();
+  }
+}

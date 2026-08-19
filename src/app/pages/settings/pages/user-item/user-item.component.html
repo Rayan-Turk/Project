@@ -1,0 +1,19 @@
+<div class="user-row">
+  <div>{{ user().id }}</div>
+  <div>{{ user().username }}</div>
+  <div>{{ user().fullName }}</div>
+  <div>{{ user().phoneNumber }}</div>
+  <div>{{ user().email }}</div>
+  <div class="actions">
+    <button class="edit-btn" [routerLink]="['edit', user().id]">Edit</button>
+    <button class="delete-btn" (click)="onDeleteClick()">Delete</button>
+  </div>
+</div>
+
+@if (showConfirm()) {
+  <app-confirm-dialog
+    [message]="'Are you sure you want to delete user ' + user().username + '?'"
+    (confirmed)="onConfirmDelete()"
+    (cancelled)="onCancelDelete()"
+  />
+}

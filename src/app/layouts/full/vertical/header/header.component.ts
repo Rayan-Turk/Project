@@ -4,6 +4,7 @@ import {
   EventEmitter,
   Input,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { AppSettings } from 'src/app/config';
+import { LoginService } from 'src/app/pages/login/login.service';
 
 interface notifications {
   id: number;
@@ -48,14 +50,9 @@ interface quicklinks {
 
 @Component({
   selector: 'app-header',
-  imports: [
-    RouterModule,
-    NgScrollbarModule,
-    TablerIconsModule,
-    MaterialModule
-  ],
+  imports: [RouterModule, NgScrollbarModule, TablerIconsModule, MaterialModule],
   templateUrl: './header.component.html',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent {
   @Input() showToggle = true;
@@ -65,6 +62,12 @@ export class HeaderComponent {
   @Output() toggleCollapsed = new EventEmitter<void>();
 
   showFiller = false;
+
+  private loginService = inject(LoginService);
+
+  onLogOut() {
+    this.loginService.logout();
+  }
 
   public selectedLanguage: any = {
     language: 'English',
@@ -103,7 +106,7 @@ export class HeaderComponent {
     private settings: CoreService,
     private vsidenav: CoreService,
     public dialog: MatDialog,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
     translate.setDefaultLang('en');
   }
@@ -295,13 +298,11 @@ export class HeaderComponent {
 @Component({
   selector: 'search-dialog',
   imports: [RouterModule, MaterialModule, TablerIconsModule, FormsModule],
-  templateUrl: 'search-dialog.component.html'
+  templateUrl: 'search-dialog.component.html',
 })
 export class AppSearchDialogComponent {
   searchText: string = '';
   navItems = navItems;
 
   navItemsData = navItems.filter((navitem) => navitem.displayName);
-
-
 }

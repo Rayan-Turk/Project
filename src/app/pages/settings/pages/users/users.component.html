@@ -1,0 +1,18 @@
+<button class="add-user-btn" routerLink="new">Add User</button>
+
+<div class="user-table">
+  <div class="user-table__header">
+    <div>ID</div>
+    <div>Username</div>
+    <div>Full Name</div>
+    <div>Phone</div>
+    <div>Email</div>
+    <div>Actions</div>
+  </div>
+
+  @for (user of users(); track user.id) {
+    <app-user-item [user]="user" (delete)="onDeleteUser($event)" />
+  }
+
+  <router-outlet></router-outlet>
+</div>

@@ -5,8 +5,25 @@ export const navItems: NavItem[] = [
     navCap: 'Home',
   },
   {
+    displayName: 'Login',
+    iconName: 'solar:home-angle-line-duotone',
+    route: 'login',
+  },
+  {
     displayName: 'Starter',
     iconName: 'solar:home-angle-line-duotone',
-    route: '/starter',
+    route: 'starter',
+  },
+  {
+    displayName: 'Settings',
+    iconName: 'solar:home-angle-line-duotone',
+    route: 'settings',
+    children: [
+      {
+        displayName: 'users',
+        iconName: 'solar:home-angle-line-duotone',
+        route: 'settings/users',
+      },
+    ],
   },
 ];

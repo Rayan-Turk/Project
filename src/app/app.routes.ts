@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
+import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
   {
@@ -9,18 +9,17 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/starter',
-        pathMatch: 'full',
-      },
-      {
-        path: 'starter',
         loadChildren: () =>
           import('./pages/pages.routes').then((m) => m.PagesRoutes),
       },
     ],
   },
   {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
     path: '**',
-    redirectTo: 'authentication/error',
+    redirectTo: '',
   },
 ];

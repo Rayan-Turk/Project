@@ -42,8 +42,14 @@ interface quicklinks {
 
 @Component({
   selector: 'app-horizontal-header',
-  imports: [RouterModule, TablerIconsModule, MaterialModule, BrandingComponent, NgScrollbarModule],
-  templateUrl: './header.component.html'
+  imports: [
+    RouterModule,
+    TablerIconsModule,
+    MaterialModule,
+    BrandingComponent,
+    NgScrollbarModule,
+  ],
+  templateUrl: './header.component.html',
 })
 export class AppHorizontalHeaderComponent {
   @Input() showToggle = true;
@@ -91,7 +97,7 @@ export class AppHorizontalHeaderComponent {
     private settings: CoreService,
     private vsidenav: CoreService,
     public dialog: MatDialog,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
     translate.setDefaultLang('en');
   }
@@ -283,7 +289,7 @@ export class AppHorizontalHeaderComponent {
 @Component({
   selector: 'app-search-dialog',
   imports: [RouterModule, MaterialModule, TablerIconsModule, FormsModule],
-  templateUrl: 'search-dialog.component.html'
+  templateUrl: 'search-dialog.component.html',
 })
 export class AppHorizontalSearchDialogComponent {
   searchText: string = '';

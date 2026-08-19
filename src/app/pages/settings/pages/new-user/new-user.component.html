@@ -1,0 +1,50 @@
+<div class="modal-overlay" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>{{ editingId ? "Edit User" : "Add New User" }}</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" type="text" formControlName="username" />
+        @if (form.controls.username.invalid && form.controls.username.touched) {
+          <span class="error">Username is required</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input id="fullName" type="text" formControlName="fullName" />
+        @if (form.controls.fullName.invalid && form.controls.fullName.touched) {
+          <span class="error">Full name is required</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input id="phoneNumber" type="text" formControlName="phoneNumber" />
+        @if (
+          form.controls.phoneNumber.invalid && form.controls.phoneNumber.touched
+        ) {
+          <span class="error">Phone number is required</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" />
+        @if (form.controls.email.invalid && form.controls.email.touched) {
+          <span class="error">A valid email is required</span>
+        }
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="cancel-btn" (click)="onClose()">
+          Cancel
+        </button>
+        <button type="submit" class="submit-btn">
+          {{ editingId ? "Update User" : "Add User" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
