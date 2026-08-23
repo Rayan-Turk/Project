@@ -69,6 +69,8 @@ export class HeaderComponent {
     this.loginService.logout();
   }
 
+  currentUser = this.loginService.getCurrentUser();
+
   public selectedLanguage: any = {
     language: 'English',
     code: 'en',

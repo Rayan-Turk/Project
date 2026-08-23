@@ -1,0 +1,32 @@
+.add-role-btn {
+  margin-bottom: 16px;
+  padding: 8px 16px;
+  background-color: #5d87ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #4570ea;
+  }
+}
+
+.role-table {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &__header {
+    display: grid;
+    grid-template-columns: 0.6fr 1.5fr 1.5fr 1fr;
+    background-color: #f6f9fc;
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 13px;
+    color: #2a3547;
+    border-bottom: 1px solid #e5eaef;
+  }
+}

@@ -1,0 +1,16 @@
+<button class="add-role-btn" routerLink="new">Add Role</button>
+
+<div class="role-table">
+  <div class="role-table__header">
+    <div>ID</div>
+    <div>Name</div>
+    <div>Normalized Name</div>
+    <div>Actions</div>
+  </div>
+
+  @for (role of roles(); track role.id) {
+    <app-role-item [role]="role" />
+  }
+
+  <router-outlet></router-outlet>
+</div>

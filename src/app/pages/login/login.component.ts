@@ -46,7 +46,6 @@ export class LoginComponent {
           this.errorMessage = response.message;
           return;
         }
-        console.log(response.token);
         this.loginService.saveToken(response.token);
         this.router.navigate(['/starter'], { replaceUrl: true });
       },

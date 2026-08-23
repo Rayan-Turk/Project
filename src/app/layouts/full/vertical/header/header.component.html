@@ -235,8 +235,10 @@
             width="95"
           />
           <div class="ms-4">
-            <h6 class="text-sm font-semibold m-0">Mathew Anderson</h6>
-            <span class="text-sm block mb-1 text-muted">Designer</span>
+            <h6 class="text-sm font-semibold m-0">{{ currentUser?.name }}</h6>
+            <span class="text-sm block mb-1 text-muted">{{
+              currentUser?.role
+            }}</span>
             <span class="flex items-center text-muted">
               <i-tabler name="mail" class="size-3.5! me-1"></i-tabler>
               info&#64;modernize.com

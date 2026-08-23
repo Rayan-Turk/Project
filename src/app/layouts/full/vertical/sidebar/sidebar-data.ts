@@ -26,4 +26,9 @@ export const navItems: NavItem[] = [
       },
     ],
   },
+  {
+    displayName: 'Roles',
+    iconName: 'solar:home-angle-line-duotone',
+    route: 'roles',
+  },
 ];

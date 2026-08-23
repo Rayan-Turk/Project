@@ -1,0 +1,10 @@
+<div class="role-row">
+  <div>{{ role().id }}</div>
+  <div>{{ role().name }}</div>
+  <div>{{ role().normalizedName }}</div>
+  <div class="actions">
+    <button class="edit-btn" [routerLink]="['edit', role().normalizedName]">
+      Edit
+    </button>
+  </div>
+</div>

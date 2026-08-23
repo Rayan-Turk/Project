@@ -78,6 +78,7 @@ export class FullComponent implements OnInit {
     this.loginService.logout();
   }
 
+  currentUser = this.loginService.getCurrentUser();
   @ViewChild('leftsidenav')
   public sidenav: MatSidenav;
   resView = false;

@@ -1,5 +1,14 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection, } from '@angular/core';
-import { provideHttpClient, HttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
+import {
+  provideHttpClient,
+  HttpClient,
+  withInterceptorsFromDi,
+  withInterceptors,
+} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { routes } from './app.routes';
 import {
@@ -11,7 +20,6 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideClientHydration } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
-
 // icons
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
@@ -21,9 +29,14 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 //Import all material modules
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { authInterceptor } from './pages/auth.interceptor';
 
 export class CustomLoader implements TranslateLoader {
-  constructor(private http: HttpClient, private prefix: string, private suffix: string) { }
+  constructor(
+    private http: HttpClient,
+    private prefix: string,
+    private suffix: string,
+  ) {}
 
   getTranslation(lang: string): Observable<any> {
     return this.http.get(`${this.prefix}${lang}${this.suffix}`);
@@ -36,6 +49,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideAnimationsAsync(), // required animations providers
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(
@@ -44,7 +58,7 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'enabled',
         anchorScrolling: 'enabled',
       }),
-      withComponentInputBinding()
+      withComponentInputBinding(),
     ),
     provideHttpClient(withInterceptorsFromDi()),
     provideClientHydration(),
@@ -61,8 +75,7 @@ export const appConfig: ApplicationConfig = {
           useFactory: HttpLoaderFactory,
           deps: [HttpClient],
         },
-      })
+      }),
     ),
   ],
 };
-
