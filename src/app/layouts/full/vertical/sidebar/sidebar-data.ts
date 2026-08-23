@@ -31,4 +31,9 @@ export const navItems: NavItem[] = [
     iconName: 'solar:home-angle-line-duotone',
     route: 'roles',
   },
+  {
+    displayName: 'Users',
+    iconName: 'solar:home-angle-line-duotone',
+    route: 'users',
+  },
 ];

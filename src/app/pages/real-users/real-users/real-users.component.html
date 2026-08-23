@@ -1,0 +1,16 @@
+<button class="add-user-btn" routerLink="new">Add User</button>
+
+<div class="real-user-table">
+  <div class="real-user-table__header">
+    <div>ID</div>
+    <div>Username</div>
+    <div>Email</div>
+    <div>Role</div>
+  </div>
+
+  @for (user of users(); track user.userId) {
+    <app-real-user-item [user]="user" />
+  }
+
+  <router-outlet />
+</div>

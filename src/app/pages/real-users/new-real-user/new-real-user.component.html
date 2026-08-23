@@ -1,0 +1,51 @@
+<div class="modal-overlay" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>Add New User</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="userName">Username</label>
+        <input id="userName" type="text" formControlName="userName" />
+        @if (form.controls.userName.invalid && form.controls.userName.touched) {
+          <span class="error">Username is required</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" />
+        @if (form.controls.email.invalid && form.controls.email.touched) {
+          <span class="error">A valid email is required</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password" />
+        @if (form.controls.password.invalid && form.controls.password.touched) {
+          <span class="error">Password must be at least 6 characters</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="roleName">Role</label>
+        <select id="roleName" formControlName="roleName">
+          <option value="" disabled selected>Select a role</option>
+          @for (role of roles(); track role.id) {
+            <option [value]="role.name">{{ role.name }}</option>
+          }
+        </select>
+        @if (form.controls.roleName.invalid && form.controls.roleName.touched) {
+          <span class="error">Please select a role</span>
+        }
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="cancel-btn" (click)="onClose()">
+          Cancel
+        </button>
+        <button type="submit" class="submit-btn">Add User</button>
+      </div>
+    </form>
+  </div>
+</div>
