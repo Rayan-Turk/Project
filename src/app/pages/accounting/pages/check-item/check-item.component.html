@@ -1,0 +1,32 @@
+<div class="check-row">
+  <div>{{ check().tranID }}</div>
+  <div>{{ check().docRefrence }}</div>
+  <div>
+    {{ check().docDate ? (check().docDate | date: "mediumDate") : "—" }}
+  </div>
+  <div>{{ check().amount | currency }}</div>
+  <div>{{ check().beneficent_InvNumb }}</div>
+  <div>{{ check().tranTypeID }}</div>
+  <div>{{ check().description }}</div>
+  <div>{{ check().remarks }}</div>
+  <div class="actions">
+    @if (canEdit()) {
+      <button class="edit-btn" [routerLink]="['edit', check().tranID]">
+        Edit
+      </button>
+    }
+    @if (canDelete()) {
+      <button class="delete-btn" (click)="onDeleteClick()">Delete</button>
+    }
+  </div>
+</div>
+
+@if (showConfirm()) {
+  <app-confirm-dialog
+    [message]="
+      'Are you sure you want to delete check ' + check().docRefrence + '?'
+    "
+    (confirmed)="onConfirmDelete()"
+    (cancelled)="onCancelDelete()"
+  />
+}

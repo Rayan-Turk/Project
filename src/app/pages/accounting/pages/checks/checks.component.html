@@ -1,0 +1,28 @@
+@if (canAdd) {
+  <button class="add-check-btn" routerLink="new">Add Check</button>
+}
+
+<div class="check-table">
+  <div class="check-table__header">
+    <div>ID</div>
+    <div>Check #</div>
+    <div>Check Date</div>
+    <div>Amount</div>
+    <div>Beneficiary</div>
+    <div>Check Type</div>
+    <div>Description</div>
+    <div>Notes</div>
+    <div>Actions</div>
+  </div>
+
+  @for (check of checks(); track check.tranID) {
+    <app-check-item
+      [check]="check"
+      [canEdit]="canEdit"
+      [canDelete]="canDelete"
+      (delete)="onDeleteCheck($event)"
+    />
+  }
+</div>
+
+<router-outlet></router-outlet>

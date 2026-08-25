@@ -17,16 +17,16 @@
       </div>
 
       <div class="permissions-grid">
-        @for (permission of allPermissions; track permission) {
+        @for (permission of allPermissions; track permission.id) {
           <label class="permission-checkbox">
             <input
               type="checkbox"
-              [checked]="isChecked(permission)"
+              [checked]="isChecked(permission.id)"
               (change)="
-                togglePermission(permission, $any($event.target).checked)
+                togglePermission(permission.id, $any($event.target).checked)
               "
             />
-            {{ permission }}
+            {{ permission.moduleName }} — {{ permission.action }}
           </label>
         }
       </div>

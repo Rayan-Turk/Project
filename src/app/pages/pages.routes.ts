@@ -3,6 +3,8 @@ import { StarterComponent } from './starter/starter.component';
 import { SettingsComponent } from './settings/settings.component';
 import { RolesComponent } from './roles/roles/roles.component';
 import { RealUsersComponent } from './real-users/real-users/real-users.component';
+import { superAdminGuard } from './not-authorized/role.guard';
+import { AccountingComponent } from './accounting/accounting.component';
 
 export const PagesRoutes: Routes = [
   {
@@ -19,6 +21,7 @@ export const PagesRoutes: Routes = [
   {
     path: 'roles',
     component: RolesComponent,
+    canActivate: [superAdminGuard],
     data: {
       title: 'Roles Page',
       urls: [
@@ -37,6 +40,8 @@ export const PagesRoutes: Routes = [
   {
     path: 'users',
     component: RealUsersComponent,
+    canActivate: [superAdminGuard],
+
     data: {
       title: 'Users Page',
       urls: [
@@ -70,6 +75,26 @@ export const PagesRoutes: Routes = [
         loadChildren: () =>
           import('../pages/settings/settings.routes').then(
             (m) => m.SettingsRoutes,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'accounting',
+    component: AccountingComponent,
+    data: {
+      title: 'Accounting Page',
+      urls: [
+        { title: 'Dashboard', url: '/dashboards/dashboard1' },
+        { title: 'Accounting Page' },
+      ],
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('../pages/accounting/accounting.routes').then(
+            (m) => m.AccoutingsRoutes,
           ),
       },
     ],

@@ -1,0 +1,55 @@
+<div class="modal-overlay" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>{{ isEditing ? "Edit Check" : "Add New Check" }}</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="docRefrence">Check Number</label>
+        <input id="docRefrence" type="text" formControlName="docRefrence" />
+      </div>
+
+      <div class="form-group">
+        <label for="docDate">Check Date</label>
+        <input id="docDate" type="date" formControlName="docDate" />
+      </div>
+
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <input id="amount" type="number" formControlName="amount" />
+      </div>
+
+      <div class="form-group">
+        <label for="beneficent_InvNumb">Beneficiary</label>
+        <input
+          id="beneficent_InvNumb"
+          type="text"
+          formControlName="beneficent_InvNumb"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="tranTypeID">Check Type</label>
+        <input id="tranTypeID" type="number" formControlName="tranTypeID" />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input id="description" type="text" formControlName="description" />
+      </div>
+
+      <div class="form-group">
+        <label for="remarks">Notes</label>
+        <input id="remarks" type="text" formControlName="remarks" />
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="cancel-btn" (click)="onClose()">
+          Cancel
+        </button>
+        <button type="submit" class="submit-btn">
+          {{ isEditing ? "Update Check" : "Add Check" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

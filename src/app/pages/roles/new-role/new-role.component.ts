@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
   FormControl,
   FormGroup,
@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { RolesService } from '../roles.service';
-import { ALL_PERMISSIONS } from '../role.model';
+import { ALL_PERMISSIONS } from 'src/app/permissions/permissions-data';
 
 @Component({
   selector: 'app-new-role',
@@ -18,7 +18,7 @@ import { ALL_PERMISSIONS } from '../role.model';
   styleUrl: './new-role.component.scss',
 })
 export class NewRoleComponent implements OnInit {
-  private router = inject(Router);
+  private location = inject(Location);
   private rolesService = inject(RolesService);
   private route = inject(ActivatedRoute);
 
@@ -44,7 +44,6 @@ export class NewRoleComponent implements OnInit {
       const matchingRole = this.rolesService
         .roles()
         .find((r) => r.normalizedName === nameParam);
-
       this.roleId = matchingRole ? matchingRole.id : 0;
       this.form.patchValue({
         roleName: matchingRole ? matchingRole.name : nameParam,
@@ -59,16 +58,17 @@ export class NewRoleComponent implements OnInit {
     }
   }
 
-  togglePermission(permission: string, checked: boolean): void {
+  togglePermission(permissionId: number, checked: boolean): void {
+    const idStr = String(permissionId);
     if (checked) {
-      this.selectedPermissions.add(permission);
+      this.selectedPermissions.add(idStr);
     } else {
-      this.selectedPermissions.delete(permission);
+      this.selectedPermissions.delete(idStr);
     }
   }
 
-  isChecked(permission: string): boolean {
-    return this.selectedPermissions.has(permission);
+  isChecked(permissionId: number): boolean {
+    return this.selectedPermissions.has(String(permissionId));
   }
 
   onSubmit(): void {
@@ -84,15 +84,12 @@ export class NewRoleComponent implements OnInit {
     };
 
     this.rolesService.saveRolePermissions(payload).subscribe({
-      next: () => {
-        this.rolesService.fetchRoles(); // refresh the list too, since the new role won't show otherwise
-        this.router.navigate(['roles']); // adjust to your actual roles list path
-      },
+      next: () => this.location.back(),
       error: (err) => console.error('Failed to save role', err),
     });
   }
 
   onClose(): void {
-    this.router.navigate(['roles']); // same path
+    this.location.back();
   }
 }

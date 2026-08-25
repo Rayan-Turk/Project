@@ -28,6 +28,8 @@ import { AppHorizontalSidebarComponent } from './horizontal/sidebar/sidebar.comp
 import { AppBreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 import { CustomizerComponent } from './shared/customizer/customizer.component';
 import { LoginService } from 'src/app/pages/login/login.service';
+import { NavItem } from './vertical/sidebar/nav-item/nav-item';
+import { PermissionsService } from 'src/app/permissions/permissions.service';
 
 const MOBILE_VIEW = 'screen and (max-width: 768px)';
 const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';
@@ -70,8 +72,6 @@ interface quicklinks {
   encapsulation: ViewEncapsulation.None,
 })
 export class FullComponent implements OnInit {
-  navItems = navItems;
-
   private loginService = inject(LoginService);
 
   onLogOut() {
@@ -79,6 +79,30 @@ export class FullComponent implements OnInit {
   }
 
   currentUser = this.loginService.getCurrentUser();
+  private permissionsService = inject(PermissionsService);
+
+  navItems: NavItem[] = this.filterNavItems(navItems);
+
+  private filterNavItems(items: NavItem[]): NavItem[] {
+    const isSuperAdmin = this.currentUser?.role === 'SuperAdmin';
+
+    return items
+      .filter((item) => {
+        if (item.superAdminOnly && !isSuperAdmin) return false;
+        if (item.requiredPermission) {
+          const { moduleName, action } = item.requiredPermission;
+          if (!this.permissionsService.can(moduleName, action)) return false;
+        }
+        return true;
+      })
+      .map((item) => ({
+        ...item,
+        children: item.children
+          ? this.filterNavItems(item.children)
+          : item.children,
+      }));
+  }
+
   @ViewChild('leftsidenav')
   public sidenav: MatSidenav;
   resView = false;
